@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
     </list>
     <ignored path="Ms. Pac-Man.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -770,12 +769,20 @@
       <workItem from="1510719078816" duration="407000" />
       <workItem from="1510861220354" duration="649000" />
       <workItem from="1511278449391" duration="30000" />
-      <workItem from="1511278503336" duration="986000" />
+      <workItem from="1511278503336" duration="1043000" />
     </task>
+    <task id="LOCAL-00001" summary="wrote something on readme to test commit success within intelliJ">
+      <created>1511291264567</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1511291264568</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129742000" />
+    <option name="totallyTimeSpent" value="129799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1383" height="927" extended-state="0" />
@@ -856,6 +863,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="wrote something on readme to test commit success within intelliJ" />
+    <option name="LAST_COMMIT_MESSAGE" value="wrote something on readme to test commit success within intelliJ" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
