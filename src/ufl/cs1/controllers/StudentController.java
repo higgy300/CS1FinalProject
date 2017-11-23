@@ -1,8 +1,10 @@
 package ufl.cs1.controllers;
 
 import game.controllers.DefenderController;
+import game.controllers.example.OriginalDefenders;
 import game.models.Defender;
 import game.models.Game;
+import game.models.Node;
 
 import java.util.List;
 
@@ -38,14 +40,13 @@ public final class StudentController implements DefenderController
 		return actions;
 	}
 
-
 	// Created this interface to check current and future state
 	private interface CheckState {
 		void updateTimer(long newTime);
 
 		StudentController.stateType getCurrentState();
 		StudentController.stateType getFutureState(int nxtState);
-		int getNextDirection(int dir);
+		int getMovingPossibilities(int dir);
 		void reset();
 
 	}
@@ -70,10 +71,13 @@ public final class StudentController implements DefenderController
 			this.futureTime = 0L;
 			this.previousTime = 0L;
 		}
+		// This returns the current type of state
 		public StudentController.stateType getCurrentState() {
 			return stateType.Kill;
 		}
+		// This retrieves what the defender will do
 		public StudentController.stateType getFutureState(int whichGator) {
+		    // If there is no rush of time
 			if (this.switchOutOfExplore < 3 && this.timer >= 20000L) {
 				++this.switchOutOfExplore;
 				return stateType.explore;
@@ -88,22 +92,69 @@ public final class StudentController implements DefenderController
 			}
 		}
 
-		@Override
-		public int getNextDirection(int dir) {
-			// FIX ME
-			return 0;
-		}
-
+		// This update makes sure the movements of the defender stay in sync with the game
 		public void updateTimer(long timeNow) {
 			this.futureTime = 40L;
 			this.timer += this.futureTime;
 			this.previousTime = timeNow;
 		}
 
-		// This method will
+		// This method will retrieve what are the possible movements for the defender based
+        // off which gater is the one retrieving
 		public int getMovingPossibilities(int whichGator) {
 			// FIX ME
-			return 0;
+            switch(whichGator) {
+                case 0:
+                    return StudentController.this.currentState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentState.getAttacker()
+                            .getLocation(), true);
+                case 1:
+                case 3:
+                    int nodeCount = 4;
+                    if (whichGator == 3) {
+                        nodeCount = 2;
+                    }
+
+                    int wherePacmanIsHeading = StudentController.this.
+                            currentState.getAttacker().getDirection();
+                    Node target = StudentController.this.
+                            currentState.getAttacker().getLocation();
+
+                    for(int iLeft = 0; iLeft < nodeCount; ++iLeft) {
+                        if (target != null) {
+                            target = target.getNeighbor(wherePacmanIsHeading);
+                        }
+                    }
+
+                    if (wherePacmanIsHeading == 0) {
+                        for(int iLeft = 0; iLeft < nodeCount; ++iLeft) {
+                            if (target != null) {
+                                target = target.getNeighbor(3);
+                            }
+                        }
+                    }
+                case 2:
+                    Node wherePacmanIs = StudentController.this.currentState.
+                            getAttacker().getLocation();
+                    List<Node> powerPillLocations = StudentController.this.
+                            currentState.getCurMaze().getPowerPillNodes();
+                    Node exploreTarget = (Node)powerPillLocations.get(2);
+                    if (StudentController.this.currentState.
+                            getDefender(whichGator).getLocation().
+                            getPathDistance(wherePacmanIs) > 40) {
+                        return StudentController.this.currentState.
+                                getDefender(whichGator).getNextDir(StudentController.
+                                this.currentState.getAttacker().
+                                getLocation(), true);
+                    }
+
+                    return StudentController.this.currentState.getDefender(whichGator).
+                            getNextDir(exploreTarget, true);
+                default:
+                    return StudentController.this.currentState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentState.getAttacker()
+                            .getLocation(), true);
+            }
 		}
 	}
 
