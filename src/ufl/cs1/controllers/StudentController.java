@@ -1,7 +1,6 @@
 package ufl.cs1.controllers;
 
 import game.controllers.DefenderController;
-import game.controllers.example.OriginalDefenders;
 import game.models.Defender;
 import game.models.Game;
 import game.models.Node;
