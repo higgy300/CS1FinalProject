@@ -1,5 +1,10 @@
-Juan H made a successful push
+11/23/17 2:37 PM - Started working on the AI. Almost done writing the chasing state for the gator
 
-Stalim made a successful pus
+11/23/17 4:35 PM - Continued the StudentController.java file on establishing original ghost behavior.
 
-Test
+11/24/17 12:50 PM - Finished implementing the classic behavior for the ghosts in the
+StudentController.java file. New goal is to further understand the behavior and analyze where we can improve
+ the behavior to make it more aggressive without making it impossible for attackers.
+
+11/24/17 1:02 PM - As of now, we will only be implementing the studentController.java file.
+I have disabled the classic behavior from being used.
