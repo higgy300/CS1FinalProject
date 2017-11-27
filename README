@@ -8,3 +8,11 @@ StudentController.java file. New goal is to further understand the behavior and 
 
 11/24/17 1:02 PM - As of now, we will only be implementing the studentController.java file.
 I have disabled the classic behavior from being used.
+
+11/25/17 10:48 AM - I made a branch to test out the tweaks to the StudentController.java file.
+So far I managed to change the exploreState method to always chase pacman. The problem now is
+that the gators are so aggressive that sometimes they'll bunch up and when pacman picks up a
+powerpill, pacman gets a lot of scores.
+
+Try to figure out a way to have the ghosts start running away when pacman is hovering near a
+power pill. That way it burns up the time while pacman can kill the gators and not score kills.

@@ -34,6 +34,15 @@ public final class StudentController implements DefenderController
             jailedState(), new StudentController.jailedState(),
             new StudentController.jailedState(), new StudentController.jailedState()};
 
+	// Constructor
+    public StudentController() {
+        // This initializes the state of all gators at the
+        // beginning of the game to be in jail.
+        this.currentGatorState = new StudentController.CheckState[]
+                {this.jailedStates[0], this.jailedStates[1], this.jailedStates[3], this.
+                        jailedStates[2]};
+    }
+
 	// This initializes an array of gator states
 	private StudentController.CheckState[] lastGatorState =
             new StudentController.CheckState[] {null, null, null, null};
@@ -44,20 +53,18 @@ public final class StudentController implements DefenderController
 	public void shutdown(Game game) { }
 	public int[] update(Game game,long timeDue)
 	{
-		int[] actions = new int[Game.NUM_DEFENDER];
-		List<Defender> enemies = game.getDefenders();
-		
-		//Chooses a random LEGAL action if required. Could be much simpler by simply returning
-		//any random number of all of the ghosts
-		for(int i = 0; i < actions.length; i++)
-		{
-			Defender defender = enemies.get(i);
-			List<Integer> possibleDirs = defender.getPossibleDirs();
-			if (possibleDirs.size() != 0)
-				actions[i]=possibleDirs.get(Game.rng.nextInt(possibleDirs.size()));
-			else
-				actions[i] = -1;
-		}
+        int[] actions = new int[]{-1, -1, -1, -1};
+        this.currentGameState = game;
+        if (this.lastGameState == null) {
+            this.lastGameState = this.currentGameState;
+        }
+
+        // This loop updates each gator's actions
+        for(int iGator = 0; iGator < 4; ++iGator) {
+            actions[iGator] = this.getNextAction(iGator, timeDue);
+        }
+
+        this.lastGameState = this.currentGameState;
 		return actions;
 	}
 
@@ -74,12 +81,12 @@ public final class StudentController implements DefenderController
 
 	// This state defines when the gator is chasing the attacker
 	private class killState implements StudentController.CheckState {
-		private int switchOutOfExplore;
+		private int switchToExplore;
 		private long timer, futureTime, previousTime;
 
 		// default constructor initializes everything to ZERO
 		private killState() {
-			this.switchOutOfExplore = 0;
+			this.switchToExplore = 0;
 			this.timer = 0L;
 			this.futureTime = 0L;
 			this.previousTime = 0L;
@@ -87,7 +94,7 @@ public final class StudentController implements DefenderController
 
 		// This will reset all attributes of this class
 		public void reset() {
-			this.switchOutOfExplore = 0;
+			this.switchToExplore = 0;
 			this.timer = 0L;
 			this.futureTime = 0L;
 			this.previousTime = 0L;
@@ -99,8 +106,8 @@ public final class StudentController implements DefenderController
 		// This retrieves what the defender will do
 		public StudentController.stateType getFutureState(int whichGator) {
 		    // If there is no rush of time
-			if (this.switchOutOfExplore < 3 && this.timer >= 20000L) {
-				++this.switchOutOfExplore;
+			if (this.switchToExplore < 3 && this.timer >= 20000L) {
+				++this.switchToExplore;
 				return stateType.Explore;
 			}
 			// This will check if gator can be killed. If true, will change state to run away.
@@ -121,15 +128,21 @@ public final class StudentController implements DefenderController
 		}
 
 		// This method will retrieve what are the possible movements for the defender based
-        // off which gater is the one retrieving
+        // off which gator is the one retrieving
 		public int getMovingPossibilities(int whichGator) {
+
+            /* Notice there are no breaks between the switch so they get all get carried out
+            depending on the gator */
             switch(whichGator) {
                 case 0:
+                    /* This case will return the location of attacker as a target for the
+                     defender */
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
                             .getLocation(), true);
                 case 1:
                 case 3:
+                    /*
                     int nodeCount = 4;
                     if (whichGator == 3) {
                         nodeCount = 2;
@@ -140,19 +153,23 @@ public final class StudentController implements DefenderController
                     Node target = StudentController.this.
                             currentGameState.getAttacker().getLocation();
 
-                    for(int iLeft = 0; iLeft < nodeCount; ++iLeft) {
+                    for(int i = 0; i < nodeCount; ++i) {
                         if (target != null) {
                             target = target.getNeighbor(wherePacmanIsHeading);
                         }
                     }
 
                     if (wherePacmanIsHeading == 0) {
-                        for(int iLeft = 0; iLeft < nodeCount; ++iLeft) {
+                        for(int i = 0; i < nodeCount; ++i) {
                             if (target != null) {
                                 target = target.getNeighbor(3);
                             }
                         }
-                    }
+                    } */
+
+                    return StudentController.this.currentGameState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentGameState.getAttacker()
+                                    .getLocation(), true);
                 case 2:
                     Node wherePacmanIs = StudentController.this.currentGameState.
                             getAttacker().getLocation();
@@ -161,7 +178,7 @@ public final class StudentController implements DefenderController
                     Node exploreTarget = (Node)powerPillLocations.get(2);
                     if (StudentController.this.currentGameState.
                             getDefender(whichGator).getLocation().
-                            getPathDistance(wherePacmanIs) > 40) {
+                            getPathDistance(wherePacmanIs) > 20) { // This was 40
                         return StudentController.this.currentGameState.
                                 getDefender(whichGator).getNextDir(StudentController.
                                 this.currentGameState.getAttacker().
@@ -169,7 +186,9 @@ public final class StudentController implements DefenderController
                     }
 
                     return StudentController.this.currentGameState.getDefender(whichGator).
-                            getNextDir(exploreTarget, true);
+                            getNextDir(StudentController.
+                                    this.currentGameState.getAttacker().
+                                    getLocation(), true); // This had explore Target
                 default:
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
@@ -258,24 +277,38 @@ public final class StudentController implements DefenderController
                     getCurMaze().getPowerPillNodes();
             switch(whichGator) {
                 case 0:
-                    if (this.switchToKill >= 2) {
+                    if (this.switchToKill >= 1) { // This was 2
                         return StudentController.this.currentGameState.
                                 getDefender(whichGator).getNextDir(StudentController.
                                 this.currentGameState.getAttacker().getLocation()
                                 , true);
                     }
 
-                    return StudentController.this.currentGameState.getDefender(whichGator).
-                            getNextDir((Node)powerPillLocations.get(1), true);
+                    /* This return statement will make them target the powerPill
+                    location area 1 while in explore mode */
+                    //return StudentController.this.currentGameState.getDefender(whichGator).
+                     //       getNextDir((Node)powerPillLocations.get(1), true);
+                    return StudentController.this.currentGameState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentGameState.getAttacker()
+                                    .getLocation(), true);
                 case 1:
-                    return StudentController.this.currentGameState.getDefender(whichGator).
-                            getNextDir((Node)powerPillLocations.get(0), true);
+                    /*return StudentController.this.currentGameState.getDefender(whichGator).
+                            getNextDir((Node)powerPillLocations.get(0), true); */
+                    return StudentController.this.currentGameState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentGameState.getAttacker()
+                                    .getLocation(), true);
                 case 2:
-                    return StudentController.this.currentGameState.getDefender(whichGator).
-                            getNextDir((Node)powerPillLocations.get(2), true);
+                    /*return StudentController.this.currentGameState.getDefender(whichGator).
+                            getNextDir((Node)powerPillLocations.get(2), true);*/
+                    return StudentController.this.currentGameState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentGameState.getAttacker()
+                                    .getLocation(), true);
                 case 3:
-                    return StudentController.this.currentGameState.getDefender(whichGator).
-                            getNextDir((Node)powerPillLocations.get(3), true);
+                    /*return StudentController.this.currentGameState.getDefender(whichGator).
+                            getNextDir((Node)powerPillLocations.get(3), true);*/
+                    return StudentController.this.currentGameState.getDefender(whichGator)
+                            .getNextDir(StudentController.this.currentGameState.getAttacker()
+                                    .getLocation(), true);
                 default:
                     return -1;
             }
@@ -357,7 +390,7 @@ public final class StudentController implements DefenderController
         return this.currentGatorState[whichGator].getMovingPossibilities(whichGator);
     }
 
-	static enum stateType { Kill, runAway, Explore, Jailed, Unchanged;
+    enum stateType { Kill, runAway, Explore, Jailed, Unchanged;
 		private stateType(){}}
 
 
