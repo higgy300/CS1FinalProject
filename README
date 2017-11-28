@@ -16,3 +16,6 @@ powerpill, pacman gets a lot of scores.
 
 Try to figure out a way to have the ghosts start running away when pacman is hovering near a
 power pill. That way it burns up the time while pacman can kill the gators and not score kills.
+
+11/28/17 4:31 PM - Tweaked the getFutureState() within the killState class to make the ghosts a
+little smarter.

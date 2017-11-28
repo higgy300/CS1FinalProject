@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="Tweaked the exploreState to make them aggressive but there are flaws.">
+    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" afterPath="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
     </list>
     <ignored path="Ms. Pac-Man.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -20,7 +20,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="436">
@@ -97,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+            <state relative-caret-position="500">
+              <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -231,10 +231,10 @@
         <option value="$PROJECT_DIR$/System/game/view/GameView.java" />
         <option value="$PROJECT_DIR$/lib/pakupaku-benchmark.jar!/game/controllers/benchmark/Devastator.class" />
         <option value="$PROJECT_DIR$/System/game/Exec.java" />
-        <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/System/game/system/_Game_.java" />
         <option value="$PROJECT_DIR$/System/game/system/_Maze.java" />
         <option value="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" />
+        <option value="$PROJECT_DIR$/README" />
       </list>
     </option>
   </component>
@@ -862,7 +862,7 @@
       <workItem from="1511616391695" duration="7959000" />
       <workItem from="1511812800378" duration="16683000" />
       <workItem from="1511891878632" duration="15000" />
-      <workItem from="1511897812457" duration="6624000" />
+      <workItem from="1511897812457" duration="6751000" />
     </task>
     <task id="LOCAL-00001" summary="wrote something on readme to test commit success within intelliJ">
       <created>1511291264567</created>
@@ -934,11 +934,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511625179066</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Updated the AI in killState so when it fetches the future state, it has additional conditional checks">
+      <created>1511904686303</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1511904686303</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196497000" />
+    <option name="totallyTimeSpent" value="196624000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
@@ -1029,7 +1036,8 @@
     <MESSAGE value="Full implementation with StudentController.java file. Classic AI has been disabled." />
     <MESSAGE value="fixed the StudentController.java default constructor and branched off from master to test out the new change in the constructor." />
     <MESSAGE value="Tweaked the exploreState to make them aggressive but there are flaws." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tweaked the exploreState to make them aggressive but there are flaws." />
+    <MESSAGE value="Updated the AI in killState so when it fetches the future state, it has additional conditional checks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the AI in killState so when it fetches the future state, it has additional conditional checks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1311,14 +1319,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/System/game/controllers/Human.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-35">
@@ -1423,6 +1423,14 @@
             <element signature="class#stateType#0;class#StudentController#0" expanded="false" />
             <element signature="method#ResetThisData#0;class#StudentController#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
