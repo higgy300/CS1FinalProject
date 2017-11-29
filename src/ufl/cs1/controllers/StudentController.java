@@ -4,7 +4,7 @@ import game.controllers.DefenderController;
 import game.models.Defender;
 import game.models.Game;
 import game.models.Node;
-import java.util.List;
+import java.util.*;
 
 public final class StudentController implements DefenderController
 {
@@ -141,6 +141,57 @@ public final class StudentController implements DefenderController
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
                             .getLocation(), true);
                 case 1:
+                    List<Node> PowerPillLocations = StudentController.this.currentGameState.getCurMaze().getPowerPillNodes();
+                    //Node BestDistance = StudentController.this.currentGameState.getPathDistance(StudentController.this.currentGameState.getAttacker().getLocation());
+
+                    Node defenderLocation = StudentController.this.currentGameState.getDefender(1).getLocation();
+                    Node attackerLocation = StudentController.this.currentGameState.getAttacker().getLocation();
+
+
+
+                    int bestDistance = StudentController.this.currentGameState.getDefender(1).getLocation().getPathDistance(attackerLocation);
+
+                    //System.out.println(StudentController.this.currentGameState.getDefender(1).getLocation());
+                    int defenderX = StudentController.this.currentGameState.getDefender(1).getLocation().getX();
+                    int attackerX = StudentController.this.currentGameState.getAttacker().getLocation().getX();
+
+                    int defenderY = StudentController.this.currentGameState.getDefender(1).getLocation().getY();
+                    int attackerY = StudentController.this.currentGameState.getAttacker().getLocation().getY();
+
+                    if((PowerPillLocations.get(0).getX() - StudentController.this.currentGameState.getAttacker().getLocation().getX() < 100) &&
+                            (PowerPillLocations.get(0).getY() - StudentController.this.currentGameState.getAttacker().getLocation().getY() < 100)){
+                        System.out.println("0");
+                        return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, false);
+                    }
+                    else if((PowerPillLocations.get(1).getX() - StudentController.this.currentGameState.getAttacker().getLocation().getX() < 100) &&
+                            (PowerPillLocations.get(1).getY() - StudentController.this.currentGameState.getAttacker().getLocation().getY() < 100)){
+                        System.out.println("1");
+                        return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, false);
+                    }
+                    else if((PowerPillLocations.get(2).getX() - StudentController.this.currentGameState.getAttacker().getLocation().getX() < 100) &&
+                            (PowerPillLocations.get(2).getY() - StudentController.this.currentGameState.getAttacker().getLocation().getY() < 100)){
+                        System.out.println("2");
+                        return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, false);
+                    }
+                    else if((PowerPillLocations.get(3).getX() - StudentController.this.currentGameState.getAttacker().getLocation().getX() < 100) &&
+                            (PowerPillLocations.get(3).getY() - StudentController.this.currentGameState.getAttacker().getLocation().getY() < 100)){
+                        System.out.println("3");
+                        return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, false);
+                    }
+                    else{
+                        if(attackerX - defenderX == bestDistance || defenderX - attackerX == bestDistance){
+                            //System.out.println("AHH");
+                            return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, true);
+                        }
+                        if(attackerY - defenderY == bestDistance || defenderY - attackerY == bestDistance){
+                            //System.out.println("AHH");
+                            return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, true);
+                        }
+                    }
+                    /*else {
+                        return StudentController.this.currentGameState.getDefender(1).getNextDir(attackerLocation, true);
+                    }*/
+
                 case 3:
                     /*
                     int nodeCount = 4;
