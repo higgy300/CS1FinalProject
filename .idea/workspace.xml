@@ -862,7 +862,7 @@
       <workItem from="1511812800378" duration="16683000" />
       <workItem from="1511891878632" duration="15000" />
       <workItem from="1511897812457" duration="6773000" />
-      <workItem from="1511915658658" duration="23000" />
+      <workItem from="1511915658658" duration="82000" />
     </task>
     <task id="LOCAL-00001" summary="wrote something on readme to test commit success within intelliJ">
       <created>1511291264567</created>
@@ -948,11 +948,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511904769478</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Updated the AI in killState so when it fetches the future state, it has additional conditional checks">
+      <created>1511915689009</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1511915689009</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196669000" />
+    <option name="totallyTimeSpent" value="196728000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
