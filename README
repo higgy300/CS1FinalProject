@@ -16,3 +16,5 @@ powerpill, pacman gets a lot of scores.
 
 Try to figure out a way to have the ghosts start running away when pacman is hovering near a
 power pill. That way it burns up the time while pacman can kill the gators and not score kills.
+
+12/7/17 6:37 PM - merged testingInterfaceMethod branch back to master. Everyone else's code should be plug-n-play with what's done so far. Remember, we built on top of the existing classic AI and improved the behavior.
