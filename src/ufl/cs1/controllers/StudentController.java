@@ -3,6 +3,7 @@ import game.controllers.DefenderController;
 import game.models.Game;
 import game.models.Node;
 import java.util.List;
+
 /* DISCLAIMER: The team is implementing the existing classic AI base code
 and building from there. We did not create the base code for the defender controller.
 We tweaked the behavior so that the gators actually have objectives
@@ -11,10 +12,10 @@ public final class StudentController implements DefenderController {
     Game lastGameState, currentGameState;
 
     // This is how many gators are supposed to exist in the game
-    private final int Gator1 = 0;    // RED GHOST
-    private final int Gator2 = 1;    // PINK GHOST DUH
-    private final int Gator3 = 2;    // YELLOW GHOST
-    private final int Gator4 = 3;    // TEAL GHOST
+    private final int Gator1 = 0;    // RED GHOST -> Stalim's
+    private final int Gator2 = 1;    // PINK GHOST -> Colin's
+    private final int Gator3 = 2;    // YELLOW GHOST -> Juan's
+    private final int Gator4 = 3;    // TEAL GHOST -> Juan's
 
     // This initializes an array of each state type for each gator
     private StudentController.killState[] killStates = new StudentController.
@@ -34,7 +35,7 @@ public final class StudentController implements DefenderController {
             jailedState(), new StudentController.jailedState(),
             new StudentController.jailedState(), new StudentController.jailedState()};
 
-    // Constructor
+    // Default constructor
     public StudentController() {
         // This initializes the state of all gators at the
         // beginning of the game to be in jail.
@@ -44,7 +45,8 @@ public final class StudentController implements DefenderController {
     }
 
     /* This initializes an array of gator states to store information and properly
-    sort between setting a new state and passing the current state to last state used */
+    sort between setting a new state and passing the current state to last state used.
+    This part is helpful for using the replay mode.*/
     private State[] lastGatorState =
             new State[] {null, null, null, null};
     private State[] currentGatorState;
@@ -53,26 +55,24 @@ public final class StudentController implements DefenderController {
     public void init(Game game) { }
     public void shutdown(Game game) { }
     public int[] update(Game game,long timeDue) {
+
+        // Initializes the actions array with -1 for all gators since this meets
+        // the criteria of the jailed state
         int[] actions = new int[]{-1, -1, -1, -1};
         this.currentGameState = game;
+
+        // If this is the first round ever, it will store the current game as last game
         if (this.lastGameState == null) {
             this.lastGameState = this.currentGameState;
         }
 
         // This loop updates each gator's actions
-
-        for(int iGator = 0; iGator < 4; ++iGator) {
-
-            actions[iGator] = this.getNextAction(iGator, timeDue);
-
+        for(int i = 0; i < 4; ++i) {
+            actions[i] = this.getNextAction(i, timeDue);
         }
 
-
-
         this.lastGameState = this.currentGameState;
-
         return actions;
-
     }
 
     // Created this interface to check current and future state
