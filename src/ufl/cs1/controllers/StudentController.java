@@ -227,9 +227,67 @@ public final class StudentController implements DefenderController {
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
                                     .getLocation(), true);
                 case 1: // This is Colin's ghost
+                    List<Node> PowerPillLocations = StudentController.this.currentGameState.getCurMaze().getPowerPillNodes();   //Makes a list of power pills
+
+                    Node attackerLocation = StudentController.this.currentGameState.getAttacker().getLocation();       //Attacker's location
+
+                    int defenderX = StudentController.this.currentGameState.getDefender(whichGator).getLocation().getX();   //Defender's x and y
+                    int defenderY = StudentController.this.currentGameState.getDefender(whichGator).getLocation().getY();
+
+                    int attackerX = StudentController.this.currentGameState.getAttacker().getLocation().getX(); //Attacker's x and y
+                    int attackerY = StudentController.this.currentGameState.getAttacker().getLocation().getY();
+
+                    int pillCount = 0;
+                    Node lastPill = null;
+
+                    for(int ii = 0;ii < PowerPillLocations.size();ii++){    //Counts the number of power pills left
+                        boolean isPillThere = StudentController.this.currentGameState.checkPowerPill(PowerPillLocations.get(ii));
+                        if(isPillThere){
+                            lastPill = PowerPillLocations.get(ii);
+                            pillCount++;
+                        }
+                    }
+
+                    if(pillCount == 1){     //If 1 power pill left, targets that pill and guards it
+                        //System.out.println("1 left!");
+                        return StudentController.this.currentGameState.getDefender(whichGator).getNextDir(lastPill, true);
+                    }
+
+
+                    for(int ii = 0;ii < PowerPillLocations.size();ii++) {   //If pacman is by a power pill, avoids her
+                        boolean isPillThere = StudentController.this.currentGameState.checkPowerPill(PowerPillLocations.get(ii));
+                        if (isPillThere) {
+                            int pillX = PowerPillLocations.get(ii).getX();
+                            int pillY = PowerPillLocations.get(ii).getY();
+                            if (java.lang.Math.abs(attackerX - pillX) < 50 && java.lang.Math.abs(attackerY - pillY) < 50) {
+                                //System.out.println("She's close!");
+                                return StudentController.this.currentGameState.getDefender(whichGator)
+                                        .getNextDir(StudentController.this.currentGameState.getAttacker()
+                                                .getLocation(), false);
+                            }
+                        }
+                    }
+
+                    if(defenderX == attackerX || attackerY == defenderY){   //Immediately targets pacman if close
+                        //System.out.println("Got 'em!");
+                        return StudentController.this.currentGameState.getDefender(whichGator).getNextDir(attackerLocation, true);
+                    }
+
+                    int direction = StudentController.this.currentGameState.getAttacker().getDirection();
+                    Node ahead = StudentController.this.currentGameState.getAttacker().getLocation().getNeighbor(direction);
+
+                    if(ahead == null){      //Targets 1 node ahead of pacman
+                        ahead = StudentController.this.currentGameState.getAttacker().getLocation().getNeighbor(2);
+                        if(ahead == null){
+                            ahead = StudentController.this.currentGameState.getAttacker().getLocation().getNeighbor(1);
+                            if(ahead == null){
+                                ahead = StudentController.this.currentGameState.getAttacker().getLocation().getNeighbor(3);
+                            }
+                        }
+                    }
+
                     return StudentController.this.currentGameState.getDefender(whichGator)
-                            .getNextDir(StudentController.this.currentGameState.getAttacker()
-                                    .getLocation(), true);
+                            .getNextDir(ahead, true);
                 case 3:
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
