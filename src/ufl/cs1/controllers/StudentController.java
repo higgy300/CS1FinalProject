@@ -12,10 +12,10 @@ public final class StudentController implements DefenderController {
     Game lastGameState, currentGameState;
 
     // This is how many gators are supposed to exist in the game
-    private final int Gator1 = 0;    // RED GHOST -> Stalim's
+    private final int Gator1 = 0;    // RED GHOST -> slave
     private final int Gator2 = 1;    // PINK GHOST -> Colin's
     private final int Gator3 = 2;    // YELLOW GHOST -> Juan's
-    private final int Gator4 = 3;    // TEAL GHOST -> Juan's
+    private final int Gator4 = 3;    // TEAL GHOST -> Stalim's
 
     // This initializes an array of each state type for each gator
     private StudentController.killState[] killStates = new StudentController.
@@ -315,14 +315,11 @@ public final class StudentController implements DefenderController {
 
     // This state defines when the gator is exploring the maze
     private class exploreState implements State {
-        private int switchToKill;
         private long lastTime, futureTime, timer;
 
         private exploreState() {
-            this.lastTime = 0L;
             this.futureTime = 0L;
             this.timer = 0L;
-            this.switchToKill = 0;
         }
 
         public void updateTimer(long timeNow) {
@@ -340,8 +337,6 @@ public final class StudentController implements DefenderController {
             this.lastTime = 0L;
             this.futureTime = 0L;
         }
-
-
 
         public int getMovingPossibilities(int whichGator) {
             List<Node> powerPillLocations = StudentController.this.currentGameState.

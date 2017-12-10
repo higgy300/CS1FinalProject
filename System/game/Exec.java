@@ -42,7 +42,7 @@ public class Exec
 			exec.runGame(attacker, studentDefender, true, _Game.DELAY);
 
 		//this can be used for numerical testing (non-visual, no delays)
-//		exec.runExperiment(new RandomAttacker(),new AttractRepelGhosts(true),100);
+//		exec.runExperiment(attacker,studentDefender,100);
 		
 		//run game without time limits (un-comment if required)
 //		exec.runGame(new RandomAttacker(),new RandomDefenders(),true,_Game.DELAY);
