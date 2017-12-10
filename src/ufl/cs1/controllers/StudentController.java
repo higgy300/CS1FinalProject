@@ -1,11 +1,12 @@
 package ufl.cs1.controllers;
 import game.controllers.DefenderController;
-
 import game.models.Game;
-
 import game.models.Node;
-
 import java.util.List;
+/* DISCLAIMER: The team is implementing the existing classic AI base code
+and building from there. We did not create the base code for the defender controller.
+We tweaked the behavior so that the gators actually have objectives
+ */
 public final class StudentController implements DefenderController {
     Game lastGameState, currentGameState;
 

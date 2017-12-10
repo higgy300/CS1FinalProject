@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="fixed the StudentController.java default constructor and branched off from master to test out the new change in the constructor.">
+    <list default="true" id="f93a5615-1996-447b-b12e-b95e14866fc7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" afterPath="$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java" />
     </list>
@@ -23,18 +23,18 @@
       <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="235" column="23" lean-forward="false" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
+            <state relative-caret-position="336">
+              <caret line="7" column="67" lean-forward="false" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4173#4174#0" expanded="true" />
-                <element signature="e#4218#4219#0" expanded="true" />
-                <element signature="e#12922#12923#0" expanded="true" />
-                <element signature="e#12970#12971#0" expanded="true" />
-                <element signature="e#19725#19726#0" expanded="true" />
-                <element signature="e#19758#19759#0" expanded="true" />
-                <element signature="e#19861#19862#0" expanded="true" />
-                <element signature="e#19908#19909#0" expanded="true" />
+                <element signature="e#4402#4403#0" expanded="true" />
+                <element signature="e#4447#4448#0" expanded="true" />
+                <element signature="e#13151#13152#0" expanded="true" />
+                <element signature="e#13199#13200#0" expanded="true" />
+                <element signature="e#19954#19955#0" expanded="true" />
+                <element signature="e#19987#19988#0" expanded="true" />
+                <element signature="e#20090#20091#0" expanded="true" />
+                <element signature="e#20137#20138#0" expanded="true" />
                 <element signature="method#ResetThisData#0;class#StudentController#0" expanded="false" />
               </folding>
             </state>
@@ -905,7 +905,7 @@
       <workItem from="1511555430983" duration="4457000" />
       <workItem from="1511616391695" duration="7888000" />
       <workItem from="1512744859520" duration="12000" />
-      <workItem from="1512923375234" duration="74000" />
+      <workItem from="1512923375234" duration="767000" />
     </task>
     <task id="LOCAL-00001" summary="wrote something on readme to test commit success within intelliJ">
       <created>1511291264567</created>
@@ -970,11 +970,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511558351066</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed the StudentController.java default constructor and branched off from master to test out the new change in the constructor.">
+      <created>1512923460974</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1512923460974</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173353000" />
+    <option name="totallyTimeSpent" value="174046000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2762" height="1770" extended-state="6" />
@@ -1401,18 +1408,18 @@
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.101/Lab10.java" />
     <entry file="file://$PROJECT_DIR$/src/ufl/cs1/controllers/StudentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="235" column="23" lean-forward="false" selection-start-line="235" selection-start-column="23" selection-end-line="235" selection-end-column="23" />
+        <state relative-caret-position="336">
+          <caret line="7" column="67" lean-forward="false" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4173#4174#0" expanded="true" />
-            <element signature="e#4218#4219#0" expanded="true" />
-            <element signature="e#12922#12923#0" expanded="true" />
-            <element signature="e#12970#12971#0" expanded="true" />
-            <element signature="e#19725#19726#0" expanded="true" />
-            <element signature="e#19758#19759#0" expanded="true" />
-            <element signature="e#19861#19862#0" expanded="true" />
-            <element signature="e#19908#19909#0" expanded="true" />
+            <element signature="e#4402#4403#0" expanded="true" />
+            <element signature="e#4447#4448#0" expanded="true" />
+            <element signature="e#13151#13152#0" expanded="true" />
+            <element signature="e#13199#13200#0" expanded="true" />
+            <element signature="e#19954#19955#0" expanded="true" />
+            <element signature="e#19987#19988#0" expanded="true" />
+            <element signature="e#20090#20091#0" expanded="true" />
+            <element signature="e#20137#20138#0" expanded="true" />
             <element signature="method#ResetThisData#0;class#StudentController#0" expanded="false" />
           </folding>
         </state>
