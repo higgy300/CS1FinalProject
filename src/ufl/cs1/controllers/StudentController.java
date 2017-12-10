@@ -229,47 +229,11 @@ public final class StudentController implements DefenderController {
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
                                     .getLocation(), true);
-                case 3: // This is Juan's ghost
-                    /*
-                    int nodeCount = 4;
-                    if (whichGator == 3) {
-                        nodeCount = 2;
-                    }
-                    int wherePacmanIsHeading = StudentController.this.
-                            currentGameState.getAttacker().getDirection();
-                    Node target = StudentController.this.
-                            currentGameState.getAttacker().getLocation();
-                    for(int i = 0; i < nodeCount; ++i) {
-                        if (target != null) {
-                            target = target.getNeighbor(wherePacmanIsHeading);
-                        }
-                    }
-                    if (wherePacmanIsHeading == 0) {
-                        for(int i = 0; i < nodeCount; ++i) {
-                            if (target != null) {
-                                target = target.getNeighbor(3);
-                            }
-                        }
-                    } */
+                case 3:
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
                                     .getLocation(), true);
-                case 2: // This is Juan's second ghost
-                    /*Node wherePacmanIs = StudentController.this.currentGameState.
-                            getAttacker().getLocation();
-                    List<Node> powerPillLocations = StudentController.this.
-                            currentGameState.getCurMaze().getPowerPillNodes();
-                    Node exploreTarget = (Node)powerPillLocations.get(2);
-
-                    if (StudentController.this.currentGameState.
-                            getDefender(whichGator).getLocation().
-                            getPathDistance(wherePacmanIs) > 20) { // This was 40
-                        return StudentController.this.currentGameState.
-                                getDefender(whichGator).getNextDir(StudentController.
-                                this.currentGameState.getAttacker().
-                                getLocation(), true);
-                    } */
-
+                case 2:
                     return StudentController.this.currentGameState.getDefender(whichGator).
                             getNextDir(StudentController.
                                     this.currentGameState.getAttacker().
