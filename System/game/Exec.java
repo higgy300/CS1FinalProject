@@ -24,15 +24,15 @@ public class Exec
 		Exec exec=new Exec();
 
 		AttackerController attacker = new Devastator();
-		//DefenderController exampleDefender = new OriginalDefenders();
+		DefenderController exampleDefender = new OriginalDefenders();
 		DefenderController studentDefender = new StudentController();
 
 		if (args.length > 0)
 		{
 			if (args[0].toLowerCase().equals("-testexample"))
-				exec.runExperiment(attacker, studentDefender, 20);
+				exec.runExperiment(attacker, studentDefender, 100);
 			else if (args[0].toLowerCase().equals("-teststudent"))
-				exec.runExperiment(attacker, studentDefender, 20);
+				exec.runExperiment(attacker, studentDefender, 100);
 			else if (args[0].toLowerCase().equals("-visualexample"))
 				exec.runGame(attacker, studentDefender, true, _Game.DELAY);
 			else
