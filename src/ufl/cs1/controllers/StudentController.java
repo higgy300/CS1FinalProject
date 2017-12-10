@@ -124,94 +124,43 @@ public final class StudentController implements DefenderController {
                 ++this.switchToExplore;
                 return stateType.Explore;
             }
-            // Checks if pacman is really close to a power pill
-            else if ((StudentController.this.currentGameState.getAttacker().
-                    getLocation().getPathDistance(powerPillLocations.get(0)) < 25)) {
-                Node pill = powerPillLocations.get(0);
+            else if (whichGator == 0) {
+                return stateType.Kill;
+            }
+            for (int i = 0; i < powerPillLocations.size()-1; i++) {
+                if ((StudentController.this.currentGameState.getAttacker().
+                        getLocation().getPathDistance(powerPillLocations.get(i)) < 25)) {
+                    Node pill = powerPillLocations.get(i);
+
                 /* Checks if ghost is near pacman while pacman is near a pill and
                 if the gator is within a good distance to kill pacman before it reaches the pill*/
-                if ((StudentController.this.currentGameState.
-                        getDefender(whichGator).getLocation().
-                        getPathDistance(powerPillLocations.get(0)) < StudentController.
-                        this.currentGameState.getAttacker().getNextDir(pill,true)) &&
-                        StudentController.this.currentGameState.
-                                getDefender(whichGator).getLocation().
-                                getPathDistance(wherePacmanIs) < 10) {
-                    return stateType.Unchanged;
-                } else {
-                    return stateType.runAway;
+
+                    if ((StudentController.this.currentGameState.
+                            getDefender(whichGator).getLocation().
+                            getPathDistance(powerPillLocations.get(i)) < StudentController.
+                            this.currentGameState.getAttacker().getNextDir(pill,true)) &&
+                            StudentController.this.currentGameState.
+                                    getDefender(whichGator).getLocation().
+                                    getPathDistance(wherePacmanIs) < 10) {
+                        boolean isPillThere = StudentController.this.currentGameState.checkPowerPill(powerPillLocations.get(i));
+                        if (isPillThere) {
+                            return stateType.runAway;
+                        } else {
+                            return stateType.Unchanged;
+                        }
+                    } else {
+                        return stateType.runAway;
+                    }
                 }
             }
-            else if ((StudentController.this.currentGameState.getAttacker().
-                    getLocation().getPathDistance(powerPillLocations.get(0)) < 25)) {
-                Node pill = powerPillLocations.get(0);
-                /* Checks if ghost is near pacman while pacman is near a pill and
-                if the gator is within a good distance to kill pacman before it reaches the pill*/
-                if ((StudentController.this.currentGameState.
-                        getDefender(whichGator).getLocation().
-                        getPathDistance(powerPillLocations.get(0)) < StudentController.
-                        this.currentGameState.getAttacker().getNextDir(pill,true)) &&
-                        StudentController.this.currentGameState.
-                                getDefender(whichGator).getLocation().
-                                getPathDistance(wherePacmanIs) < 10) {
-                    return stateType.Unchanged;
-                } else {
-                    return stateType.runAway;
-                }
-            }
-            else if ((StudentController.this.currentGameState.getAttacker().
-                    getLocation().getPathDistance(powerPillLocations.get(0)) < 25)) {
-                Node pill = powerPillLocations.get(0);
-                /* Checks if ghost is near pacman while pacman is near a pill and
-                if the gator is within a good distance to kill pacman before it reaches the pill*/
-                if ((StudentController.this.currentGameState.
-                        getDefender(whichGator).getLocation().
-                        getPathDistance(powerPillLocations.get(0)) < StudentController.
-                        this.currentGameState.getAttacker().getNextDir(pill,true)) &&
-                        StudentController.this.currentGameState.
-                                getDefender(whichGator).getLocation().
-                                getPathDistance(wherePacmanIs) < 10) {
-                    return stateType.Unchanged;
-                } else {
-                    return stateType.runAway;
-                }
-            }
-            else if ((StudentController.this.currentGameState.getAttacker().
-                    getLocation().getPathDistance(powerPillLocations.get(0)) < 25)) {
-                Node pill = powerPillLocations.get(0);
-                /* Checks if ghost is near pacman while pacman is near a pill and
-                if the gator is within a good distance to kill pacman before it reaches the pill*/
-                if ((StudentController.this.currentGameState.
-                        getDefender(whichGator).getLocation().
-                        getPathDistance(powerPillLocations.get(0)) < StudentController.
-                        this.currentGameState.getAttacker().getNextDir(pill,true)) &&
-                        StudentController.this.currentGameState.
-                                getDefender(whichGator).getLocation().
-                                getPathDistance(wherePacmanIs) < 10) {
-                    return stateType.Unchanged;
-                } else {
-                    return stateType.runAway;
-                }
-            }
-            // This will check if gator can be killed. If true, will change state to run away.
-            else if(StudentController.this.currentGameState.getDefender(whichGator).isVulnerable()) {
-                return stateType.runAway;
-            }
-            // If nothing changes:
-            else {
-                return stateType.Unchanged;
-            }
+            return stateType.Unchanged;
         }
 
         // This update makes sure the movements of the defender stay in sync with the game
         public void updateTimer(long timeNow) {
-
             this.futureTime = 40L;
-
             this.timer += this.futureTime;
-
             this.previousTime = timeNow;
-
         }
 
         /* This method will retrieve what are the possible movements for the defender based
@@ -220,7 +169,7 @@ public final class StudentController implements DefenderController {
             /* Notice there are no breaks between the switch so they get all get carried out
             depending on the gator */
             switch(whichGator) {
-                case 0: // This is Stalim's ghost
+                case 0: // This ghost will be the most aggressive
                     /* This case will return the location of attacker as a target for the
                      defender */
                     return StudentController.this.currentGameState.getDefender(whichGator)
@@ -289,6 +238,7 @@ public final class StudentController implements DefenderController {
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(ahead, true);
                 case 3:
+
                     return StudentController.this.currentGameState.getDefender(whichGator)
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
                                     .getLocation(), true);
@@ -334,36 +284,27 @@ public final class StudentController implements DefenderController {
         }
 
         public int getMovingPossibilities(int whichGator) {
-            List<Node> powerPillLocations = StudentController.this.
-                    currentGameState.getCurMaze().getPowerPillNodes();
-            if (whichGator == 0) {
-                return StudentController.this.currentGameState.getDefender(whichGator).
-                        getNextDir((Node)powerPillLocations.get(1), true);
-            } else if (whichGator == 1) {
-                return StudentController.this.currentGameState.getDefender(whichGator).
-                        getNextDir((Node)powerPillLocations.get(0), true);
-            } /*else if (whichGator == 3) {
-                return StudentController.this.currentGameState.getDefender(whichGator).
-                        getNextDir((Node)powerPillLocations.get(3), true);
-            } else {
-                return whichGator == 2 ? StudentController.this.currentGameState.
-                        getDefender(whichGator).getNextDir((Node)powerPillLocations.
-                        get(2), true) : -1;
-            } */
-            // This is what Juan's gators will do in runAway State
-            else if (whichGator == 2 || whichGator == 3) {
+            // This is what gators will do in runAway State
+            Node wherePacmanIs = StudentController.this.currentGameState.
+                    getAttacker().getLocation();
+            if (whichGator == 2 || whichGator == 3 || whichGator == 1) {
                 if (StudentController.this.currentGameState.
                         getDefender(whichGator).isVulnerable()) {
-                    Node wherePacmanIs = StudentController.this.currentGameState.
-                            getAttacker().getLocation();
                     return StudentController.this.currentGameState.
                             getDefender(whichGator).
                             getNextDir(wherePacmanIs, false);
                 } else {
-                    return StudentController.this.currentGameState.getDefender(whichGator).
-                            getNextDir((Node)powerPillLocations.get(3), true);
+                    return StudentController.this.currentGameState.
+                            getDefender(whichGator).
+                            getNextDir(wherePacmanIs, false);
                 }
-            } else {
+            }
+            else if (whichGator == 0) {
+                    return StudentController.this.currentGameState.
+                            getDefender(whichGator).
+                            getNextDir(wherePacmanIs, true);
+            }
+            else {
                 return -1;
             }
         }
@@ -374,177 +315,66 @@ public final class StudentController implements DefenderController {
 
     // This state defines when the gator is exploring the maze
     private class exploreState implements State {
-
         private int switchToKill;
-
         private long lastTime, futureTime, timer;
 
-
-
         private exploreState() {
-
             this.lastTime = 0L;
-
             this.futureTime = 0L;
-
             this.timer = 0L;
-
             this.switchToKill = 0;
-
         }
-
-
 
         public void updateTimer(long timeNow) {
-
             this.futureTime = 40L;
-
             this.timer += this.futureTime;
-
             this.lastTime = timeNow;
-
         }
-
-
 
         public StudentController.stateType getCurrentState() {
-
             return stateType.Explore;
-
         }
 
-
-
         public void reset() {
-
             this.timer = 0L;
-
             this.lastTime = 0L;
-
             this.futureTime = 0L;
-
         }
 
 
 
         public int getMovingPossibilities(int whichGator) {
-
             List<Node> powerPillLocations = StudentController.this.currentGameState.
-
                     getCurMaze().getPowerPillNodes();
-
             switch(whichGator) {
-
                 case 0:
-
-                    if (this.switchToKill >= 1) { // This was 2
-
-                        return StudentController.this.currentGameState.
-
-                                getDefender(whichGator).getNextDir(StudentController.
-
-                                        this.currentGameState.getAttacker().getLocation()
-
-                                , true);
-
-                    }
-
-
-
-                    /* This return statement will make them target the powerPill
-
-                    location area 1 while in explore mode */
-
-                    //return StudentController.this.currentGameState.getDefender(whichGator).
-
-                    //       getNextDir((Node)powerPillLocations.get(1), true);
-
                     return StudentController.this.currentGameState.getDefender(whichGator)
-
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
-
                                     .getLocation(), true);
-
                 case 1:
-
-                    /*return StudentController.this.currentGameState.getDefender(whichGator).
-
-                            getNextDir((Node)powerPillLocations.get(0), true); */
-
                     return StudentController.this.currentGameState.getDefender(whichGator)
-
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
-
                                     .getLocation(), true);
-
                 case 2:
-
-                    /*return StudentController.this.currentGameState.getDefender(whichGator).
-
-                            getNextDir((Node)powerPillLocations.get(2), true);*/
-
                     return StudentController.this.currentGameState.getDefender(whichGator)
-
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
-
                                     .getLocation(), true);
-
                 case 3:
-
-                    /*return StudentController.this.currentGameState.getDefender(whichGator).
-
-                            getNextDir((Node)powerPillLocations.get(3), true);*/
-
                     return StudentController.this.currentGameState.getDefender(whichGator)
-
                             .getNextDir(StudentController.this.currentGameState.getAttacker()
-
                                     .getLocation(), true);
-
                 default:
-
                     return -1;
-
             }
-
         }
 
-
-
-        public StudentController.stateType getFutureState(int ghostID) {
-
-            if (StudentController.this.currentGameState.getDefender(ghostID).isVulnerable()) {
-
+        public StudentController.stateType getFutureState(int whichGator) {
+            if (StudentController.this.currentGameState.getDefender(whichGator).isVulnerable()) {
                 return stateType.runAway;
-
             } else {
-
-                if (this.switchToKill < 2) {
-
-                    if (this.timer >= 4000L) {
-
-                        ++this.switchToKill;
-
-                        return stateType.Kill;
-
-                    }
-
-                } else if (this.switchToKill >= 2 && this.timer >= 2000L) {
-
-                    ++this.switchToKill;
-
-                    return stateType.Kill;
-
-                }
-
-
-
                 return stateType.Unchanged;
-
             }
-
         }
-
     }
 
     /* This state defines the gator behavior when it's waiting inside the jail
